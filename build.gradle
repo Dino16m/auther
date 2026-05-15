@@ -1,0 +1,58 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '2.0.0'
+    id 'org.jetbrains.kotlin.plugin.serialization' version '2.0.0'
+    id 'io.ktor.plugin' version '2.3.11'
+}
+
+group "com.hiz"
+version "0.0.1"
+mainClassName = "io.ktor.server.netty.EngineMain"
+
+def isDevelopment = project.ext.has("development")
+applicationDefaultJvmArgs = ["-Dio.ktor.development=$isDevelopment"]
+
+repositories {
+    mavenCentral()
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        showStandardStreams = true
+    }
+    outputs.upToDateWhen {
+        false
+    }
+}
+
+dependencies {
+    implementation "org.ktorm:ktorm-core:4.0.0"
+    implementation "io.ktor:ktor-server-default-headers-jvm"
+    implementation "io.ktor:ktor-server-auto-head-response:$ktor_version"
+    implementation "io.ktor:ktor-server-request-validation:$ktor_version"
+    implementation "io.ktor:ktor-server-cors-jvm"
+    implementation "at.favre.lib:bcrypt:0.10.2"
+    implementation "io.ktor:ktor-server-status-pages:$ktor_version"
+    implementation "io.ktor:ktor-server-core-jvm"
+    implementation "io.ktor:ktor-server-webjars-jvm"
+    implementation "org.webjars:jquery:3.2.1"
+    implementation "io.konform:konform-jvm:0.6.0"
+    implementation "io.ktor:ktor-server-sessions-jvm"
+    implementation "io.ktor:ktor-server-auth-jvm"
+    implementation "io.ktor:ktor-server-auth-jwt-jvm"
+    implementation "io.ktor:ktor-server-content-negotiation-jvm"
+    implementation "io.ktor:ktor-serialization-kotlinx-json-jvm"
+    implementation "org.postgresql:postgresql:$postgres_version"
+    implementation "com.h2database:h2:$h2_version"
+    implementation "io.ktor:ktor-serialization-jackson-jvm"
+    implementation "io.ktor:ktor-server-swagger-jvm"
+    implementation "io.ktor:ktor-server-openapi"
+    implementation "io.ktor:ktor-server-netty-jvm"
+    implementation "ch.qos.logback:logback-classic:$logback_version"
+    implementation "io.ktor:ktor-server-config-yaml"
+    testImplementation "io.ktor:ktor-server-tests-jvm"
+    testImplementation 'org.jetbrains.kotlin:kotlin-test'
+    testImplementation "org.mockito.kotlin:mockito-kotlin:5.3.1"
+    testImplementation "org.mockito:mockito-core:5.12.0"
+
+}
